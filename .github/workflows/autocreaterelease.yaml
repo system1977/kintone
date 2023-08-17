@@ -14,7 +14,9 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Extract Tag
-      run: TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*'); echo "Extracted Tag: $TAG"
+      run: |
+        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*'); 
+        echo "Extracted Tag: $TAG"
 
     - name: Create Release
       env:
