@@ -1,22 +1,28 @@
-name: Auto Release
+---
+name: "pre-release"
 
 on:
   push:
     branches:
-      - main
+      - "master"
 
 jobs:
-  release:
-    runs-on: ubuntu-latest
+  pre-release:
+    name: "Pre Release"
+    runs-on: "ubuntu-latest"
 
     steps:
-    - name: Create Release
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*')
-        if [ "$TAG" != "" ]; then
-          git tag $TAG
-          git push origin $TAG
-          gh release create $TAG
-        fi
+      # ...
+      - name: "Build & test"
+        run: |
+          echo "done!"
+
+      - uses: "system1977/kintone@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          automatic_release_tag: "latest"
+          prerelease: true
+          title: "Development Build"
+          files: |
+            LICENSE.txt
+            *.jar
