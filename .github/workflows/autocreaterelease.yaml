@@ -1,0 +1,22 @@
+name: Auto Release
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*')
+        if [ "$TAG" != "" ]; then
+          git tag $TAG
+          git push origin $TAG
+          gh release create $TAG
+        fi
