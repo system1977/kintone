@@ -12,9 +12,6 @@ jobs:
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
-      
-    - name: Print Commit Message
-      run: echo "Commit Message: $(git log -1 --pretty=%B)"
     
     - name: Extract Tag
       run: TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*'); echo "Extracted Tag: $TAG"
