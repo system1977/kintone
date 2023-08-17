@@ -29,7 +29,7 @@
         totalCountElement.style.top = '5px';
         totalCountElement.style.right = '300px'; // 左に10pxずらす
         totalCountElement.style.padding = '5px';
-        totalCountElement.style.backgroundColor = 'pinky'; // 黄色
+        totalCountElement.style.backgroundColor = 'pink'; // 黄色
 	totalCountElement.style.border = '2px solid black'; // 黒い太枠
 	totalCountElement.style.height = '30px'; // 高さを30pxに設定
         totalCountElement.style.fontWeight = 'bold';
