@@ -10,21 +10,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    
-    - name: Extract Tag
-      run: |
-        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*'); 
-        echo "Extracted Tag: $TAG"
-
-    - name: Create Release
+    - name: Create release
+      id: create_release
+      uses: actions/create-release@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      run: |
-        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*')
-        if [ "$TAG" != "" ]; then
-          git tag $TAG
-          git push origin $TAG
-          gh release create $TAG
-        fi
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: false
+        prerelease: false
