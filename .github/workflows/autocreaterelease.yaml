@@ -1,28 +1,25 @@
----
-name: "pre-release"
+name: Auto Release
 
 on:
   push:
     branches:
-      - "master"
+      - main
 
 jobs:
-  pre-release:
-    name: "Pre Release"
-    runs-on: "ubuntu-latest"
+  release:
+    runs-on: ubuntu-latest
 
     steps:
-      # ...
-      - name: "Build & test"
-        run: |
-          echo "done!"
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - uses: "system1977/kintone@latest"
-        with:
-          repo_token: "${{ secrets.GITHUB_TOKEN }}"
-          automatic_release_tag: "latest"
-          prerelease: true
-          title: "Development Build"
-          files: |
-            LICENSE.txt
-            *.jar
+    - name: Create Release
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG=$(git log -1 --pretty=%B | grep -o 'v[0-9]*\.[0-9]*\.[0-9]*')
+        if [ "$TAG" != "" ]; then
+          git tag $TAG
+          git push origin $TAG
+          gh release create $TAG
+        fi
