@@ -10,13 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+
+    - name: Get next version
+      uses: reecetech/version-increment@2023.4.1
+      id: version
+      with:
+        scheme: semver
+        increment: patch
+
     - name: Create release
       id: create_release
       uses: actions/create-release@v1.0.0
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
-        tag_name: release
+        tag_name: ${{ steps.version.outputs.version }
         release_name: Release
         draft: false
         prerelease: false
