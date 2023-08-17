@@ -47,3 +47,6 @@
         );
     }
 })(); 
+
+
+https://cdn.jsdelivr.net/gh/system1977/kintone@latest/%E8%BB%8A%E6%A4%9C2.js
