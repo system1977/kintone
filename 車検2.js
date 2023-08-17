@@ -27,7 +27,7 @@
         var totalCountElement = document.createElement('div');
         totalCountElement.style.position = 'absolute';
         totalCountElement.style.top = '5px';
-        totalCountElement.style.right = '400px'; // 左に10pxずらす
+        totalCountElement.style.right = '300px'; // 左に10pxずらす
         totalCountElement.style.padding = '5px';
         totalCountElement.style.backgroundColor = 'yellow'; // 黄色
 	totalCountElement.style.border = '2px solid black'; // 黒い太枠
